@@ -1,7 +1,12 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using FinalHerramientas.Data;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+builder.Services.AddDbContext<LugarContext>(options =>
+    options.UseSqlite(builder.Configuration.GetConnectionString("LugarContext") ?? throw new InvalidOperationException("Connection string 'LugarContext' not found.")));
 
 var app = builder.Build();
 
